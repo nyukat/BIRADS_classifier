@@ -12,12 +12,12 @@ This is an implementation of the model used for [BIRADS](https://breast-cancer.c
 To use the pretrained model, inputs are required to be 4 images for 4 different views (L-CC, L-MLO, R-CC, R-MLO) with resolution of 2600*2000.
 
 ## How to run the code
-Available options could be edited in `density_model.py`. You can change the `model` between `cnn` and `histogram`. Please keep `input_size = (2600, 2000)` since the provied model could only be used for images in this resolution. You may need to set the `gpu_number` to fit your situation.  
+Available options could be edited in `birads_prediction.py`. Please keep `input_size = (2600, 2000)` since the provied model could only be used for images in this resolution. You may need to set the `gpu_number` to fit your situation.  
 
 Run the following command to use the model:
 
 ```bash
-python density_model.py
+python birads_prediction.py
 ```
 ## Reference
 
