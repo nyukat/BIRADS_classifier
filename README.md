@@ -26,9 +26,4 @@ If you found this code useful, please cite [the following paper](https://arxiv.o
 Krzysztof J. Geras, Stacey Wolfson, Yiqiu Shen, S. Gene Kim, Linda Moy & Kyunghyun Cho. 
  **"High-resolution breast cancer screening with multi-view deep convolutional neural networks."** *arXiv preprint arXiv:1703.07047 (2017).*
 
-    @article{geras2017high,
-  title={High-resolution breast cancer screening with multi-view deep convolutional neural networks},
-  author={Geras, Krzysztof J and Wolfson, Stacey and Shen, Yiqiu and Kim, S and Moy, Linda and Cho, Kyunghyun},
-  journal={arXiv preprint arXiv:1703.07047},
-  year={2017}
-}
+    @article{geras2017high, title={High-resolution breast cancer screening with multi-view deep convolutional neural networks},author={Geras, Krzysztof J and Wolfson, Stacey and Shen, Yiqiu and Kim, S and Moy, Linda and Cho, Kyunghyun}, journal={arXiv preprint arXiv:1703.07047}, year={2017}}
