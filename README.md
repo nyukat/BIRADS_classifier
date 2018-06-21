@@ -1,34 +1,38 @@
 # High-resolution breast cancer screening with multi-view deep convolutional neural networks
 ## Introduction
-This is an implementation of the model used for [BIRADS](https://breast-cancer.ca/bi-rads/) classification as described in https://arxiv.org/abs/1703.07047. The implementation allows users to get the BIRADS prediction by applying our pretrained CNN model on standrad screening mammogram exam with four views. We also provide a sample exam in this repository. 
+This is an implementation of the model used for [BI-RADS](https://breast-cancer.ca/bi-rads/) classification as described in our paper ["High-resolution breast cancer screening with multi-view deep convolutional neural networks"]https://arxiv.org/abs/1703.07047. The implementation allows users to get the BI-RADS prediction by applying our pretrained CNN model on standrad screening mammogram exam with four views. As a part of this repository, we provide a sample exam (in `images` directory).
 
 ## Prerequisites
 
-* Python 3.6, TensorFlow 1.5.0, NumPy 1.14.3, SciPy 1.0.0
-* NVIDIA GPU Tesla M40
+* Python (3.6), TensorFlow (1.5.0), NumPy (1.14.3), SciPy (1.0.0)
+* NVIDIA GPU (we used Tesla M40).
 
 ## Data
 
-To use the pretrained model, inputs are required to be 4 images for 4 different views (L-CC, L-MLO, R-CC, R-MLO) with resolution of 2600*2000.
+To use the pretrained model, the input is required to consist of four images, one for each view (L-CC, L-MLO, R-CC, R-MLO). Each image has to have the size of 2600x2000 pixels. The images in the provided sample exam were already cropped to the correct size.
 
 ## How to run the code
-Available options could be edited in `birads_prediction.py`. Please keep `input_size = (2600, 2000)` since the provied model could only be used for images in this resolution. You may need to set the `gpu_number` to fit your situation.  
+Available options can be found at the bottom of the file `birads_prediction.py`. Please keep `input_size = (2600, 2000)` as the provided pretrained models were trained with images in this resolution. You may need to change `gpu_number`.
 
-Run the following command to use the model:
+Run the following command to use the model.
 
 ```bash
 python birads_prediction.py
 ```
+
+#TODO: the results people should get when running the model. Please look at the other repository for what it should look like.
+
 ## Reference
 
-If you found this code useful, please cite [the following paper](https://arxiv.org/pdf/1703.07047.pdf):
+If you found this code useful, please cite our paper:
 
-Krzysztof J. Geras, Stacey Wolfson, Yiqiu Shen, S. Gene Kim, Linda Moy & Kyunghyun Cho. 
- **"High-resolution breast cancer screening with multi-view deep convolutional neural networks."** *arXiv preprint arXiv:1703.07047 (2017).*
+**"High-resolution breast cancer screening with multi-view deep convolutional neural networks"**
+Krzysztof J. Geras, Stacey Wolfson, Yiqiu Shen, S. Gene Kim, Linda Moy, Kyunghyun Cho
+2017
 
     @article{geras2017high, 
-      title={High-resolution breast cancer screening with multi-view deep convolutional neural networks},
-      author={Geras, Krzysztof J and Wolfson, Stacey and Shen, Yiqiu and Kim, S and Moy, Linda and Cho, Kyunghyun}, 
-      journal={arXiv preprint arXiv:1703.07047},
-      year={2017}
+        title = {High-resolution breast cancer screening with multi-view deep convolutional neural networks},
+        author = {Krzysztof J. Geras and Stacey Wolfson and Yiqiu Shen and S. Gene Kim and Linda Moy and Kyunghyun Cho}, 
+        journal = {arXiv:1703.07047},
+        year = {2017}
     }
