@@ -1,6 +1,6 @@
 # High-resolution breast cancer screening with multi-view deep convolutional neural networks
 ## Introduction
-This is an implementation of the model used for [BI-RADS](https://breast-cancer.ca/bi-rads/) classification as described in our paper ["High-resolution breast cancer screening with multi-view deep convolutional neural networks"]https://arxiv.org/abs/1703.07047. The implementation allows users to get the BI-RADS prediction by applying our pretrained CNN model on standrad screening mammogram exam with four views. As a part of this repository, we provide a sample exam (in `images` directory).
+This is an implementation of the model used for [BI-RADS](https://breast-cancer.ca/bi-rads/) classification as described in our paper ["High-resolution breast cancer screening with multi-view deep convolutional neural networks"](https://arxiv.org/abs/1703.07047). The implementation allows users to get the BI-RADS prediction by applying our pretrained CNN model on standrad screening mammogram exam with four views. As a part of this repository, we provide a sample exam (in `images` directory).
 
 ## Prerequisites
 
