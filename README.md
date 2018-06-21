@@ -26,8 +26,8 @@ python birads_prediction.py
 
 If you found this code useful, please cite our paper:
 
-**"High-resolution breast cancer screening with multi-view deep convolutional neural networks"**
-Krzysztof J. Geras, Stacey Wolfson, Yiqiu Shen, S. Gene Kim, Linda Moy, Kyunghyun Cho
+**"High-resolution breast cancer screening with multi-view deep convolutional neural networks"**\
+Krzysztof J. Geras, Stacey Wolfson, Yiqiu Shen, S. Gene Kim, Linda Moy, Kyunghyun Cho\
 2017
 
     @article{geras2017high, 
