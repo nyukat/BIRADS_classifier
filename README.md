@@ -4,7 +4,7 @@ This is an implementation of the model used for [BI-RADS](https://breast-cancer.
 
 ## Prerequisites
 
-* Python (3.6), TensorFlow (1.5.0), NumPy (1.14.3), SciPy (1.0.0)
+* Python (3.6), TensorFlow (1.5.0), NumPy (1.14.3), SciPy (1.0.0), PILLOW
 * NVIDIA GPU (we used Tesla M40).
 
 ## Data
