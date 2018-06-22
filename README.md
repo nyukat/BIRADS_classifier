@@ -16,11 +16,18 @@ Available options can be found at the bottom of the file `birads_prediction.py`.
 
 Run the following command to use the model.
 
-```bash
+```
 python birads_prediction.py
 ```
 
-#TODO: the results people should get when running the model. Please look at the other repository for what it should look like.
+You should get the following output:
+
+```
+BI-RADS prediction:
+        BI-RADS 0:      0.21831559
+        BI-RADS 1:      0.38092783
+        BI-RADS 2:      0.4007566
+```
 
 ## Reference
 
