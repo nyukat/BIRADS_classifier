@@ -88,10 +88,10 @@ def sample_prediction(parameters):
     birads2_prob = prediction_birads[0][2]
 
     # nicely prints out the predictions
-    print('BIRADS prediction:\n' +
-          '\tBIRADS 0:\t\t\t' + str(birads0_prob) + '\n' +
-          '\tBIRADS 1:\t\t\t' + str(birads1_prob) + '\n' +
-          '\tBIRADS 2:\t\t\t' + str(birads2_prob))
+    print('BI-RADS prediction:\n' +
+          '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
+          '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
+          '\tBI-RADS 2:\t' + str(birads2_prob))
 
 if __name__ == "__main__":
 
