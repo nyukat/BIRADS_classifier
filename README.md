@@ -42,9 +42,9 @@ python convert_model.py \
     saved_models/model.p
 ```
 
-## Testing
+## Tests
 
-Testing requires `pytest` and `pytest-xdist` (pip). Run:
+Tests require `pytest` and `pytest-xdist` (pip).
 
 ```bash
 pytest -v --forked --numprocesses=1
