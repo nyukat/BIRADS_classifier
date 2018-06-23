@@ -1,10 +1,11 @@
+import argparse
 import tensorflow as tf
 
 import models
 import utils
 
 
-def sample_prediction(parameters):
+def inference(parameters):
     """
     Function that creates a model, loads the parameters, and makes a prediction
     :param parameters:
@@ -46,9 +47,9 @@ def sample_prediction(parameters):
     session.run(tf.global_variables_initializer())
 
     # loads the pre-trained parameters if it's provided
-    if parameters['initial_parameters'] is not None:
+    if parameters['model_path'] is not None:
         saver = tf.train.Saver(max_to_keep=None)
-        saver.restore(session, save_path=parameters['initial_parameters'])
+        saver.restore(session, save_path=parameters['model_path'])
 
     # load input images
     datum_l_cc = utils.load_images(parameters['image_path'], 'L-CC')
@@ -57,6 +58,7 @@ def sample_prediction(parameters):
     datum_r_mlo = utils.load_images(parameters['image_path'], 'R-MLO')
 
     # populate feed_dict for TF session
+    # No dropout and no gaussian noise in inference
     feed_dict_by_model = {
         nodropout_probability: 1.0,
         gaussian_noise_std: 0.0,
@@ -81,18 +83,20 @@ def sample_prediction(parameters):
 
 if __name__ == "__main__":
 
-    # global settings
-    parameters_ = dict(
-        device_type='gpu',
-        # specify which GPU for training
-        gpu_number=0,
-        # size of the input images
-        input_size=(2600, 2000),
-        # path to the input images
-        image_path='images/',
-        # directory to the saved parameters
-        initial_parameters='saved_models/model.ckpt'
-    )
+    parser = argparse.ArgumentParser(description='Run Inference')
+    parser.add_argument('--model_path', default='saved_models/model.ckpt')
+    parser.add_argument('--device-type', default="cpu")
+    parser.add_argument('--gpu_number', default=0)
+    parser.add_argument('--image-path', default="images/")
+    args = parser.parse_args()
+
+    parameters_ = {
+        "model_path": args.model_path,
+        "device_type": args.device_type,
+        "gpu_number": args.gpu_number,
+        "image_path": args.image_path,
+        "input_size": (2600, 2000),
+    }
 
     # do a sample prediction
-    sample_prediction(parameters_)
+    inference(parameters_)

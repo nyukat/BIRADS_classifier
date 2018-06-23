@@ -44,5 +44,6 @@ def baseline(x, parameters, nodropout_probability=None, gaussian_noise_std=None)
 
 
 class BaselineBreastModel:
+
     def __init__(self, parameters, x, nodropout_probability=None, gaussian_noise_std=None):
         self.y_prediction_birads = baseline(x, parameters, nodropout_probability, gaussian_noise_std)

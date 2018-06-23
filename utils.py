@@ -6,8 +6,8 @@ def load_images(image_path, view):
     """
     Function that loads and preprocess input images
     :param image_path:
-    :param view:
-    :return:
+    :param view: L-CC / R-CC / L-MLO / R-MLO
+    :return: Batch x Height x Width x Channels array
     """
 
     def normalise_single_image(image_):

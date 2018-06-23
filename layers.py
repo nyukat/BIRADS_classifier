@@ -3,6 +3,7 @@ import tensorflow as tf
 
 def all_views_conv_layer(input_layer, layer_name, number_of_filters=32, filter_size=(3, 3), stride=(1, 1),
                          padding='VALID', biases_initializer=tf.zeros_initializer()):
+    """Convolutional layers across all 4 views"""
   
     input_l_cc, input_r_cc, input_l_mlo, input_r_mlo = input_layer
 
@@ -28,6 +29,7 @@ def all_views_conv_layer(input_layer, layer_name, number_of_filters=32, filter_s
 
 
 def all_views_max_pool(input_layer, stride=(2, 2)):
+    """Max-pool across all 4 views"""
   
     input_l_cc, input_r_cc, input_l_mlo, input_r_mlo = input_layer
 
@@ -46,6 +48,7 @@ def all_views_max_pool(input_layer, stride=(2, 2)):
 
 
 def all_views_global_avg_pool(input_layer):
+    """Average-pool across all 4 views"""
   
     input_l_cc, input_r_cc, input_l_mlo, input_r_mlo = input_layer
 
@@ -63,6 +66,7 @@ def all_views_global_avg_pool(input_layer):
 
 
 def all_views_flattening_layer(input_layer):
+    """Flatten and concatenate all activations from all 4 views"""
   
     input_l_cc, input_r_cc, input_l_mlo, input_r_mlo = input_layer
 
@@ -80,6 +84,7 @@ def all_views_flattening_layer(input_layer):
 
 
 def fc_layer(input_layer, number_of_units=128, activation_fn=tf.nn.relu, reuse=None, scope=None):
+    """Fully connected layer"""
 
     h = tf.contrib.layers.fully_connected(inputs=input_layer, num_outputs=number_of_units, activation_fn=activation_fn,
                                           reuse=reuse, scope=scope)
@@ -88,6 +93,7 @@ def fc_layer(input_layer, number_of_units=128, activation_fn=tf.nn.relu, reuse=N
 
 
 def softmax_layer(input_layer, number_of_outputs=3):
+    """Softmax layer"""
   
     with tf.variable_scope('fully_connected_1') as fully_scope:
         y_prediction = tf.contrib.layers.fully_connected(inputs=input_layer, num_outputs=number_of_outputs,
@@ -97,6 +103,7 @@ def softmax_layer(input_layer, number_of_outputs=3):
 
 
 def dropout_layer(input_layer, nodropout_probability):
+    """Dropout layer"""
   
     output = tf.nn.dropout(input_layer, nodropout_probability)
 
@@ -104,6 +111,7 @@ def dropout_layer(input_layer, nodropout_probability):
 
 
 def gaussian_noise_layer(input_layer, std):
+    """Additive gaussian noise layer"""
   
     noise = tf.random_normal(tf.shape(input_layer), mean=0.0, stddev=std, dtype=tf.float32)
 
@@ -113,6 +121,7 @@ def gaussian_noise_layer(input_layer, std):
 
 
 def all_views_gaussian_noise_layer(input_layer, std):
+    """Add gaussian noise across all 4 views"""
   
     input_l_cc, input_r_cc, input_l_mlo, input_r_mlo = input_layer
 
