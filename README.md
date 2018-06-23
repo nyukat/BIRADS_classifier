@@ -19,7 +19,7 @@ Available options can be found at the bottom of the files `birads_prediction_tf.
 
 Run the following command to use the model.
 
-```
+```bash
 python birads_prediction_(tf|torch).py
 ```
 
