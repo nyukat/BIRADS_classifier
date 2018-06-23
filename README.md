@@ -9,7 +9,6 @@ This is an implementation of the model used for [BI-RADS](https://breast-cancer.
 * NumPy (1.14.3)
 * SciPy (1.0.0)
 * Pillow (5.1.0)
-* NVIDIA GPU (we used Tesla M40).
 
 ## Data
 
