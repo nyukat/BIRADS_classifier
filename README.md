@@ -15,7 +15,7 @@ This is an implementation of the model used for [BI-RADS](https://breast-cancer.
 To use the pretrained model, the input is required to consist of four images, one for each view (L-CC, L-MLO, R-CC, R-MLO). Each image has to have the size of 2600x2000 pixels. The images in the provided sample exam were already cropped to the correct size.
 
 ## How to run the code
-Available options can be found at the bottom of the files `birads_prediction_tf.py` or `birads_prediction_torch.py`. Please keep `input_size = (2600, 2000)` as the provided pretrained models were trained with images in this resolution. You may need to change `gpu_number`.
+Available options can be found at the bottom of the files `birads_prediction_tf.py` or `birads_prediction_torch.py`. Please keep `input_size = (2600, 2000)` as the provided pretrained models were trained with images in this resolution.
 
 Run the following command to use the model.
 
