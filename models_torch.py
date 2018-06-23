@@ -76,7 +76,12 @@ class BaselineBreastModel(nn.Module):
         x = self.conv_layer_dict["conv3a"](x)
         x = self.conv_layer_dict["conv3b"](x)
         x = self.conv_layer_dict["conv3c"](x)
+
+        # WARNING: This is technically correct, but not robust to model architecture changes.
+        #          Need a more robust solution for dealing with "SAME" padding, which is not
+        #            available in PyTorch.
         x = self.all_views_pad(x, pad=(0, 1, 0, 0))
+
         x = self.all_views_max_pool(x, stride=(2, 2))
         x = self.conv_layer_dict["conv4a"](x)
         x = self.conv_layer_dict["conv4b"](x)
@@ -99,24 +104,3 @@ class BaselineBreastModel(nn.Module):
         x = F.softmax(x, dim=1)
 
         return x
-
-
-class BaselineHistogramModel(nn.Module):
-
-    def __init__(self, num_bins):
-        super(BaselineHistogramModel, self).__init__()
-        self.fc1 = nn.Linear(num_bins * 4, 100)
-        self.fc2 = nn.Linear(100, 4)
-
-    def forward(self, x):
-        x = self.fc1(x)
-        x = F.relu(x)
-        x = self.fc2(x)
-        x = F.softmax(x, dim=1)
-        return x
-
-    def param_dict(self):
-        return dict(zip(
-            ["w0", "b0", "w1", "b1"],
-            self.parameters(),
-        ))
