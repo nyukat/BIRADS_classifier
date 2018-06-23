@@ -5,7 +5,7 @@ import models_tf as models
 import utils
 
 
-def inference(parameters):
+def inference(parameters, verbose=True):
     """
     Function that creates a model, loads the parameters, and makes a prediction
     :param parameters:
@@ -43,45 +43,45 @@ def inference(parameters):
         else:
             raise RuntimeError(parameters['device_type'])
 
-        # create a tf session
-        session = tf.Session(config=session_config)
-        session.run(tf.global_variables_initializer())
+        with tf.Session(config=session_config) as session:
+            session.run(tf.global_variables_initializer())
 
-        # loads the pre-trained parameters if it's provided
-        if parameters['model_path'] is not None:
-            saver = tf.train.Saver(max_to_keep=None)
-            saver.restore(session, save_path=parameters['model_path'])
+            # loads the pre-trained parameters if it's provided
+            if parameters['model_path'] is not None:
+                saver = tf.train.Saver(max_to_keep=None)
+                saver.restore(session, save_path=parameters['model_path'])
 
-        # load input images
-        datum_l_cc = utils.load_images(parameters['image_path'], 'L-CC')
-        datum_r_cc = utils.load_images(parameters['image_path'], 'R-CC')
-        datum_l_mlo = utils.load_images(parameters['image_path'], 'L-MLO')
-        datum_r_mlo = utils.load_images(parameters['image_path'], 'R-MLO')
+            # load input images
+            datum_l_cc = utils.load_images(parameters['image_path'], 'L-CC')
+            datum_r_cc = utils.load_images(parameters['image_path'], 'R-CC')
+            datum_l_mlo = utils.load_images(parameters['image_path'], 'L-MLO')
+            datum_r_mlo = utils.load_images(parameters['image_path'], 'R-MLO')
 
-        # populate feed_dict for TF session
-        # No dropout and no gaussian noise in inference
-        feed_dict_by_model = {
-            nodropout_probability: 1.0,
-            gaussian_noise_std: 0.0,
-            x_l_cc: datum_l_cc,
-            x_r_cc: datum_r_cc,
-            x_l_mlo: datum_l_mlo,
-            x_r_mlo: datum_r_mlo,
-        }
+            # populate feed_dict for TF session
+            # No dropout and no gaussian noise in inference
+            feed_dict_by_model = {
+                nodropout_probability: 1.0,
+                gaussian_noise_std: 0.0,
+                x_l_cc: datum_l_cc,
+                x_r_cc: datum_r_cc,
+                x_l_mlo: datum_l_mlo,
+                x_r_mlo: datum_r_mlo,
+            }
 
-        # run the session for a prediction
-        prediction_birads = session.run(y_prediction_birads, feed_dict=feed_dict_by_model)
-        birads0_prob = prediction_birads[0][0]
-        birads1_prob = prediction_birads[0][1]
-        birads2_prob = prediction_birads[0][2]
+            # run the session for a prediction
+            prediction_birads = session.run(y_prediction_birads, feed_dict=feed_dict_by_model)
 
-        # nicely prints out the predictions
-        print('BI-RADS prediction:\n' +
-              '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
-              '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
-              '\tBI-RADS 2:\t' + str(birads2_prob))
+            if verbose:
+                # nicely prints out the predictions
+                birads0_prob = prediction_birads[0][0]
+                birads1_prob = prediction_birads[0][1]
+                birads2_prob = prediction_birads[0][2]
+                print('BI-RADS prediction:\n' +
+                      '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
+                      '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
+                      '\tBI-RADS 2:\t' + str(birads2_prob))
 
-        return prediction_birads[0]
+            return prediction_birads[0]
 
 
 if __name__ == "__main__":

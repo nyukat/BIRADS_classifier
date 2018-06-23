@@ -5,9 +5,9 @@ import models_torch as models
 import utils
 
 
-def inference(parameters):
+def inference(parameters, verbose=True):
 
-    # allocate computation resources
+    # resolve device
     device = torch.device(
         "cuda:{}".format(parameters["gpu_number"]) if parameters["device_type"] == "gpu"
         else "cpu"
@@ -17,7 +17,7 @@ def inference(parameters):
     model = models.BaselineBreastModel(nodropout_probability=1.0, gaussian_noise_std=0.0).to(device)
     model.load_state_dict(torch.load(parameters["model_path"]))
 
-    # load input images
+    # load input images and prepare data
     datum_l_cc = utils.load_images(parameters['image_path'], 'L-CC')
     datum_r_cc = utils.load_images(parameters['image_path'], 'R-CC')
     datum_l_mlo = utils.load_images(parameters['image_path'], 'L-MLO')
@@ -33,15 +33,15 @@ def inference(parameters):
     with torch.no_grad():
         prediction_birads = model(x).cpu().numpy()
 
-    birads0_prob = prediction_birads[0][0]
-    birads1_prob = prediction_birads[0][1]
-    birads2_prob = prediction_birads[0][2]
-
-    # nicely prints out the predictions
-    print('BI-RADS prediction:\n' +
-          '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
-          '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
-          '\tBI-RADS 2:\t' + str(birads2_prob))
+    if verbose:
+        # nicely prints out the predictions
+        birads0_prob = prediction_birads[0][0]
+        birads1_prob = prediction_birads[0][1]
+        birads2_prob = prediction_birads[0][2]
+        print('BI-RADS prediction:\n' +
+              '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
+              '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
+              '\tBI-RADS 2:\t' + str(birads2_prob))
 
     return prediction_birads[0]
 
