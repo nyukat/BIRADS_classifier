@@ -8,8 +8,9 @@ import utils
 def inference(parameters, verbose=True):
     """
     Function that creates a model, loads the parameters, and makes a prediction
-    :param parameters:
-    :return:
+    :param parameters: dictionary of parameters
+    :param verbose: Whether to print predicted probabilities
+    :return: Predicted probabilities for each class 
     """
     tf.set_random_seed(7)
 

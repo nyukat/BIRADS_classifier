@@ -6,6 +6,11 @@ import models_torch
 
 
 def tf_to_torch(input_path, output_path):
+    """
+    Convert TensorFlow checkpoint to PyTorch model pickle
+    :param input_path: path to TensorFlow checkpoint
+    :param output_path: path to save PyTorch model pickle
+    """
     g = tf.Graph()
     bbmodel = models_torch.BaselineBreastModel(nodropout_probability=1.0)
     with tf.Session(graph=g, config=tf.ConfigProto(allow_soft_placement=True)) as sess:
@@ -45,10 +50,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     tf_to_torch(args.input_path, args.output_path)
-
-
-"""
-python convert_model.py \
-    saved_models/model.ckpt \
-    saved_models/model.p
-"""

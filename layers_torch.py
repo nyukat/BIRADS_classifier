@@ -4,6 +4,8 @@ import torch.nn.functional as F
 
 
 class AllViewsGaussianNoise(nn.Module):
+    """Add gaussian noise across all 4 views"""
+
     def __init__(self, gaussian_noise_std):
         super(AllViewsGaussianNoise, self).__init__()
         self.gaussian_noise_std = gaussian_noise_std
@@ -21,6 +23,8 @@ class AllViewsGaussianNoise(nn.Module):
 
 
 class AllViewsConvLayer(nn.Module):
+    """Convolutional layers across all 4 views"""
+
     def __init__(self, in_channels, number_of_filters=32, filter_size=(3, 3), stride=(1, 1)):
         super(AllViewsConvLayer, self).__init__()
         self.cc = nn.Conv2d(
@@ -53,6 +57,8 @@ class AllViewsConvLayer(nn.Module):
 
 
 class AllViewsMaxPool(nn.Module):
+    """Max-pool across all 4 views"""
+
     def __init__(self):
         super(AllViewsMaxPool, self).__init__()
 
@@ -70,6 +76,8 @@ class AllViewsMaxPool(nn.Module):
 
 
 class AllViewsAvgPool(nn.Module):
+    """Average-pool across all 4 views"""
+
     def __init__(self):
         super(AllViewsAvgPool, self).__init__()
 
@@ -81,6 +89,8 @@ class AllViewsAvgPool(nn.Module):
 
 
 class AllViewsPad(nn.Module):
+    """Pad tensor across all 4 views"""
+
     def __init__(self):
         super(AllViewsPad, self).__init__()
 

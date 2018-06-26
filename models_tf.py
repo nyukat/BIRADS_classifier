@@ -33,6 +33,7 @@ def baseline(x, parameters, nodropout_probability=None, gaussian_noise_std=None)
     h = layers.all_views_conv_layer(h, 'conv5b', number_of_filters=256, filter_size=[3, 3], stride=[1, 1])
     h = layers.all_views_conv_layer(h, 'conv5c', number_of_filters=256, filter_size=[3, 3], stride=[1, 1])
 
+    # Pool, flatten, and fully connected layers
     h = layers.all_views_global_avg_pool(h)
     h = layers.all_views_flattening_layer(h)
     h = layers.fc_layer(h, number_of_units=1024)

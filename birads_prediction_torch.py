@@ -6,7 +6,12 @@ import utils
 
 
 def inference(parameters, verbose=True):
-
+    """
+    Function that creates a model, loads the parameters, and makes a prediction
+    :param parameters: dictionary of parameters
+    :param verbose: Whether to print predicted probabilities
+    :return: Predicted probabilities for each class
+    """
     # resolve device
     device = torch.device(
         "cuda:{}".format(parameters["gpu_number"]) if parameters["device_type"] == "gpu"
